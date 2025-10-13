@@ -1,7 +1,7 @@
 {
   "app": {
     "bundleName": "com.lqsy.xdyou",
-    "vendor": "example",
+    "vendor": "Lqsy",
     "versionCode": 1000000,
     "versionName": "1.0.0",
     "icon": "$media:layered_image",

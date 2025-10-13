@@ -10,7 +10,91 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "label"
+      "value": "XDYou"
+    },
+    {
+      "name": "test",
+      "value": "test"
+    },
+    {
+      "name": "111",
+      "value": "1"
+    },
+    {
+      "name": "password_ehall",
+      "value": "一站式登录密码"
+    },
+    {
+      "name": "account_student_id",
+      "value": "学号"
+    },
+    {
+      "name": "forgot_password",
+      "value": "忘记密码"
+    },
+    {
+      "name": "login",
+      "value": "登录"
+    },
+    {
+      "name": "Network_Lost",
+      "value": "请检查网络状态"
+    },
+    {
+      "name": "input_empty_tips",
+      "value": "输入不能为空"
+    },
+    {
+      "name": "login_page",
+      "value": "登录"
+    },
+    {
+      "name": "login_more",
+      "value": "登录以使用更多服务"
+    },
+    {
+      "name": "guest_mode",
+      "value": "游客模式"
+    },
+    {
+      "name": "login_with_ehall",
+      "value": "使用一站式登录"
+    },
+    {
+      "name": "app_name",
+      "value": "XDYou"
+    },
+    {
+      "name": "homepage",
+      "value": "主页"
+    },
+    {
+      "name": "recommend",
+      "value": "社团推荐"
+    },
+    {
+      "name": "planet",
+      "value": "博客星球"
+    },
+    {
+      "name": "settings",
+      "value": "设置"
+    },
+    {
+      "name": "mine",
+      "value": "我的"
+    },
+    {
+      "name": "fontsize_change",
+      "value": "修改文字大小"
+    },
+    {
+      "name": "Cancel",
+      "value": "取消"
+    },
+    {
+      "name": "Confirmed",
+      "value": "确认"
     }
   ]
 }

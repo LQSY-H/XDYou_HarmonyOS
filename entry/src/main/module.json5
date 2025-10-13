@@ -32,7 +32,8 @@
               "ohos.want.action.home"
             ]
           }
-        ]
+        ],
+
       }
     ],
     "extensionAbilities": [
