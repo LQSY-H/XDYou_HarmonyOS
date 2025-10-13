@@ -95,6 +95,10 @@
     {
       "name": "Confirmed",
       "value": "确认"
+    },
+    {
+      "name": "my_classtable",
+      "value": "我的课程表"
     }
   ]
 }
