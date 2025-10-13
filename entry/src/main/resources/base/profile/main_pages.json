@@ -1,5 +1,6 @@
 {
   "src": [
-    "view/IndexBottomTab"
+    "pages/Homepage",
+    "view/Login"
   ]
 }

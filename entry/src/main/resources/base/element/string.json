@@ -95,6 +95,14 @@
     {
       "name": "Confirmed",
       "value": "确认"
+    },
+    {
+      "name": "network_info",
+      "value": "网络信息"
+    },
+    {
+      "name": "Internet",
+      "value": "互联网"
     }
   ]
 }

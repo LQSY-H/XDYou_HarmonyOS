@@ -1,14 +1,14 @@
 import SettingsItem from '../viewmodel/SettingsItem';
 import SettingsItemData from '../viewmodel/SettingsItemData';
 
-/**
- * Setting tab content
- */
-@Entry
+@Builder
+export function SettingsBuilder(name: string, param: object){
+  Settings()
+}
+
 @Preview
 @Component
-export default struct Setting {
-
+export default struct Settings {
   @Builder
   settingCell(item: SettingsItemData) {
     Row() {

@@ -1,4 +1,4 @@
-import { promptAction } from '@kit.ArkUI';
+import { promptAction, router } from '@kit.ArkUI';
 import ConnectionUtils from '../common/network/ConnectionUtils';
 
 
@@ -29,10 +29,13 @@ function blueTextStyle() {
 /**
  * Login page
  */
-
-@Entry
+@Builder
+export function LoginBuilder(name: string, param: object){
+  Login()
+}
+@Preview
 @Component
-struct LoginPage {
+export default struct Login {
   @State account: string = '';
   @State password: string = '';
   @State isShowProgress: boolean = false;
@@ -52,8 +55,10 @@ struct LoginPage {
           this.isShowProgress = false;
           this.timeOutId = -1;
 
+          result = true
           if (result) {
-            this.pathStack.pushPathByName('MainPage', null);
+            this.pathStack.replacePathByName('Home', null)
+
           } else {
             this.getUIContext().getPromptAction().showToast({
               message: $r('app.string.Network_Lost')
