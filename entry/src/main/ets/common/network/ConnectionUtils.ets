@@ -16,6 +16,7 @@
 import { connection } from '@kit.NetworkKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { promptAction } from '@kit.ArkUI';
 
 const TAG: string = 'ConnectionUtils';
 
@@ -70,24 +71,24 @@ export class ConnectionUtils {
   /**
    *The method of listening to the network status.
    */
-  registerNetworkAvailableStatus(context: UIContext) {
+  registerNetworkAvailableStatus() {
     this.netConnection.on('netAvailable', () => {
-      context.getPromptAction().showToast({
-        message: $r('app.string.Network_Available'),
+      promptAction.showToast({
+        message: '网络可用',
         duration: 2000
       });
     });
 
     this.netConnection.on('netUnavailable', () => {
-      context.getPromptAction().showToast({
-        message: $r('app.string.Network_Unavailable'),
+      promptAction.showToast({
+        message: '网络不可用',
         duration: 2000
       });
     });
 
     this.netConnection.on('netLost', () => {
-      context.getPromptAction().showToast({
-        message: $r('app.string.Network_Lost'),
+      promptAction.showToast({
+        message: '网络丢失',
         duration: 2000
       });
     });

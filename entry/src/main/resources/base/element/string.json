@@ -95,6 +95,14 @@
     {
       "name": "Confirmed",
       "value": "确认"
+    },
+    {
+      "name": "Network_Available",
+      "value": "网络连接成功"
+    },
+    {
+      "name": "Network_Unavailable",
+      "value": "网络不可用"
     }
   ]
 }

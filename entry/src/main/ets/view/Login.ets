@@ -1,5 +1,5 @@
 import { promptAction } from '@kit.ArkUI';
-import { ConnectionUtils } from '../../common/network/ConnectionUtils';
+import ConnectionUtils from '../common/network/ConnectionUtils';
 
 
 @Extend(TextInput)
@@ -128,12 +128,11 @@ struct LoginPage {
             top: '48vp',
             bottom: '12vp'
           })
-          // .onClick(async () => {
-          //   await ConnectionUtils.isNetworkConnected().then((value) => {
-          //     this.login(value);
-          //   })
-          // })
-
+          .onClick(async () => {
+            await ConnectionUtils.isNetworkConnected().then((value) => {
+              this.login(value);
+            })
+          })
 
         if (this.isShowProgress) {
           LoadingProgress()
