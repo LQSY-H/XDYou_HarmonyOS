@@ -9,6 +9,8 @@ export function SettingsBuilder(name: string, param: object){
 @Preview
 @Component
 export default struct Settings {
+  promptAction: PromptAction = this.getUIContext().getPromptAction();
+
   @Builder
   settingCell(item: SettingsItemData) {
     Row() {
@@ -48,6 +50,18 @@ export default struct Settings {
     })
   }
 
+  @State selectedItem: string = ''
+  private MenuItemClick(item: MenuItem){
+    this.selectedItem = item.id
+    switch (item.id){
+      case '0':
+
+    }
+
+
+
+  }
+
   build() {
     Column({ space: 12 }) {
       Row() {
@@ -74,6 +88,7 @@ export default struct Settings {
                       this.settingCell(cell);
                     }
                     .height('48vp')
+                    .onClick(() => this.MenuItemClick(item))
                   }, (cell: SettingsItemData) => JSON.stringify(cell))
                 }
                 .width('90%')
@@ -100,3 +115,4 @@ export default struct Settings {
       .width('100%')// 确保Column占满屏幕宽度
   }
 }
+
