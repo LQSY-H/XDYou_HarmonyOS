@@ -11,13 +11,13 @@ export default struct Homepage{
   @StorageLink('inputAccount')inputAccount:string = '';
   @StorageLink('inputPassword')inputPassword:string = '';
 
-  aboutToAppear(): void {
-    this.inputAccount = preferencesUtil.getChangeInputAccount()
-    this.inputPassword = preferencesUtil.getChangeInputPassword()
-    if(this.inputAccount && this.inputPassword != ''){
-      this.isLoggedIn = true
-    }
-  }
+  // aboutToAppear(): void {
+  //   this.inputAccount = preferencesUtil.getChangeInputAccount()
+  //   this.inputPassword = preferencesUtil.getChangeInputPassword()
+  //   if(this.inputAccount && this.inputPassword != ''){
+  //     this.isLoggedIn = true
+  //   }
+  // }
 
   build() {
     Navigation(this.pathStack) {

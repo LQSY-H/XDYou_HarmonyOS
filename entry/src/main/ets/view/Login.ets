@@ -29,10 +29,13 @@ function blueTextStyle() {
 /**
  * Login page
  */
+
+
 @Builder
 export function LoginBuilder(name: string, param: object){
   Login()
 }
+@Entry
 @Preview
 @Component
 export default struct Login {
@@ -57,7 +60,7 @@ export default struct Login {
 
           result = true
           if (result) {
-            this.pathStack.replacePathByName('Home', null)
+
 
           } else {
             this.getUIContext().getPromptAction().showToast({
@@ -136,6 +139,7 @@ export default struct Login {
           .onClick(async () => {
             await ConnectionUtils.isNetworkConnected().then((value) => {
               this.login(value);
+              this.pathStack.pushPathByName('IndexBottomTab', null)
             })
           })
 

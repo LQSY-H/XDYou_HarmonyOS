@@ -14,6 +14,11 @@
       "name": "Settings",
       "pageSourceFile": "src/main/ets/view/Settings.ets",
       "buildFunction": "SettingsBuilder"
+    },
+    {
+      "name": "IndexBottomTab",
+      "pageSourceFile": "src/main/ets/view/IndexBottomTab.ets",
+      "buildFunction": "IndexBottomTabBuilder"
     }
   ]
 }

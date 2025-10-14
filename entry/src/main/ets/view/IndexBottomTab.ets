@@ -4,10 +4,14 @@ import Home from './Home'
 import Settings from './Settings'
 
 
+@Builder
+export function IndexBottomTabBuilder(name: string, param: object){
+  IndexBottomTab()
+}
 @Entry
 @Preview
 @Component
-struct TabIndex {
+struct IndexBottomTab {
   @State currentPage: number = 0;
   @State triggerValue: number = 0;
 
