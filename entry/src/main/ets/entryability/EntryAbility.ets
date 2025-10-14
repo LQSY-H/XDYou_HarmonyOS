@@ -2,12 +2,16 @@ import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.Ab
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import ConnectionUtils from '../common/network/ConnectionUtils';
+import PreferencesUtil from '../common/database/PreferencesUtil';
+import { PreferencesUtil } from '../common/database/PreferencesUtil';
 
 
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    PreferencesUtil.getInputAccount(this.context)
+    PreferencesUtil.getInputPassword(this.context)
     ConnectionUtils.openRegister();
     hilog.isLoggable(0x0000, 'testTag', hilog.LogLevel.INFO);
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');

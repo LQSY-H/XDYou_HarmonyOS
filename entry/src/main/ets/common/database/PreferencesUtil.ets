@@ -16,6 +16,7 @@
 import { preferences } from '@kit.ArkData';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { text } from '@kit.ArkGraphics2D';
 
 const KEY_APP_FONT_SIZE = 'appFontSize';
 const TAG = 'PreferencesUtil';
@@ -26,17 +27,10 @@ const TAG = 'PreferencesUtil';
 export class PreferencesUtil {
   preference?: preferences.Preferences;
 
-  /**
-   *The method of creating a preferences Instance.
-   */
   getFontPreferences(context: Context) {
     this.preference = preferences.getPreferencesSync(context, { name: 'FontPreferences' });
     hilog.info(0x0000, TAG, 'create success');
   }
-
-  /**
-   *The method of saving fontsize offset change.
-   */
   saveChangeFontSize(fontSizeOffset: number) {
     this.preference?.putSync(KEY_APP_FONT_SIZE, fontSizeOffset);
     this.preference?.flush(
@@ -48,19 +42,11 @@ export class PreferencesUtil {
         hilog.info(0x0000, TAG, 'Succeeded in flushing.');
       });
   }
-
-  /**
-   *The method of getting fontsize offset.
-   */
   getChangeFontSize() {
     let fontSizeOffset: number = 0;
     fontSizeOffset = this.preference?.getSync(KEY_APP_FONT_SIZE, 0) as number;
     return fontSizeOffset;
   }
-
-  /**
-   *The method of Determining Whether a key Exists.
-   */
   isKeyExist(): boolean {
     let isKeyExist: boolean = false;
     this.preference?.has(KEY_APP_FONT_SIZE).then(async (isExist: boolean) => {
@@ -70,6 +56,47 @@ export class PreferencesUtil {
     });
     return isKeyExist;
   }
+
+  getInputAccount(context: Context){
+    this.preference = preferences.getPreferencesSync(context, { name: 'AccountPreferences' });
+  }
+  saveInputAccount(accountInput: string){
+    this.preference?.putSync('inputAccount', accountInput);
+    this.preference?.flush()
+  }
+  getChangeInputAccount(){
+    let inputAccount: string ='';
+    inputAccount = this.preference?.getSync('inputAccount', '') as string;
+    return inputAccount;
+  }
+  isAccountExist():boolean{
+    let isAccountExist: boolean = false;
+    this.preference?.has('inputAccount').then(async (isExist: boolean) => {
+      isAccountExist = isExist;
+    })
+    return isAccountExist;
+  }
+
+  getInputPassword(context: Context){
+    this.preference = preferences.getPreferencesSync(context, { name: 'PasswordPreferences' });
+  }
+  saveInputPassword(passwordInput: string){
+    this.preference?.putSync('inputPassword', passwordInput);
+    this.preference?.flush()
+  }
+  getChangeInputPassword(){
+    let inputPassword: string ='';
+    inputPassword = this.preference?.getSync('inputPassword', '') as string;
+    return inputPassword;
+  }
+  isPasswordExist():boolean{
+    let isPasswordExist: boolean = false;
+    this.preference?.has('inputPassword').then(async (isExist: boolean) => {
+      isPasswordExist = isExist;
+    })
+    return isPasswordExist;
+  }
+
 }
 
 export default new PreferencesUtil();
