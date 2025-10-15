@@ -1,14 +1,19 @@
 import SettingsItem from '../viewmodel/SettingsItem';
 import SettingsItemData from '../viewmodel/SettingsItemData';
+import { promptAction, PromptAction } from '@kit.ArkUI';
 
 @Builder
 export function SettingsBuilder(name: string, param: object){
   Settings()
 }
 
+@Entry
 @Preview
 @Component
 export default struct Settings {
+  @State showPwdDialog: boolean = false;
+  @State inputPwd: string = '';
+  @State isPwdVisible: boolean = false;
   promptAction: PromptAction = this.getUIContext().getPromptAction();
 
   @Builder
@@ -25,6 +30,7 @@ export default struct Settings {
         Text(item.title)
           .fontSize(16)
       }
+
       if (item.subtitle == "switch") {
         Toggle({ type: ToggleType.Switch, isOn: false })
       } else {
@@ -32,12 +38,12 @@ export default struct Settings {
           Text(item.subtitle)
             .fontSize(14)
             .fontColor('#222222')
-            .margin({right: 4})
+            .margin({ right: 4 })
           Image($r('app.media.rightbutton'))
             .fillColor('#3f5f90')
             .width('12vp')
             .height('24vp')
-            .margin({right: 8})
+            .margin({ right: 8 })
         }
         .justifyContent(FlexAlign.End)
       }
@@ -51,13 +57,174 @@ export default struct Settings {
   }
 
   @State selectedItem: string = ''
-  private MenuItemClick(item: MenuItem){
-    this.selectedItem = item.id
-    switch (item.id){
-      case '0':
 
+  MenuItemClick(item: SettingsItemData): void {
+    this.selectedItem = item.id;
+    switch (item.id) {
+      case 'pepwd':
+        this.pepwd()
+        break
+      case 'phypwd':
+        this.phypwd()
+        break
+      case 'dianfeiroom':
+        this.dianfeiroom()
+        break
+      case 'dianfeipwd':
+        this.dianfeipwd()
+        break
+      case 'internetpwd':
+        this.internetpwd()
+        break
+      case 'themecolor':
+        this.themecolor()
+        break
+      case 'darkmode':
+        this.darkmode()
+        break
+      case 'language':
+        this.language()
+        break
+      case 'clsbgswitch':
+        this.clsbgswitch()
+        break
+      case 'clsbgselect':
+        this.clsbgselect()
+        break
+      case 'refreshclstab':
+        this.refreshclstab()
+        break
+      case 'clean':
+        this.clean()
+        break
+      case 'logout':
+        this.logout()
+        break
+      case 'aboutus':
+        this.aboutus()
+        break
+      case 'update':
+        this.update()
+        break
     }
+  } //switch完
 
+  private pepwd() {
+    this.showPwdDialog = true;
+    // 重置密码输入状态
+    this.inputPwd = '';
+    this.isPwdVisible = false;
+  }
+
+  private phypwd() {
+    DialogHub.init(uiContext);
+    let customDialog = DialogHub.getCustomDialog();
+
+    //具体学习：https://gitee.com/hadss/DialogHub/blob/master/hadss_dialog/README.md
+  }
+
+  private dianfeiroom() {
+
+  }
+
+  private dianfeipwd() {
+
+  }
+
+  private internetpwd() {
+
+  }
+
+  private themecolor() {
+
+  }
+
+  private darkmode() {
+
+  }
+
+  private language() {
+
+  }
+
+  private clsbgswitch() {
+
+  }
+
+  private clsbgselect() {
+
+  }
+
+  private refreshclstab() {
+    this.promptAction.showDialog({
+      title: '确定强制刷新课表？',
+      message: '可能耗时较久，等上几秒就好。\n',
+
+      buttons: [
+        {
+          text: '取消',
+          color: '#000000'
+        },
+        {
+          text: '确定',
+          color: '#000000'
+        }
+      ]
+    })
+  }
+
+  private clean() {
+    this.promptAction.showDialog({
+      title: '确定清除缓存并重启应用?',
+      message: '可解决应用出现的一些问题\n',
+
+      buttons: [
+        {
+          text: '取消',
+          color: '#000000'
+        },
+        {
+          text: '确定',
+          color: '#ffffbd00'
+        }
+      ]
+    })
+  }
+
+  private logout() {
+    this.promptAction.showDialog({
+      title: '确定退出登录并重启应用?',
+      message: '用于切换账号或者应用出现一些问题时\n',
+
+      buttons: [
+        {
+          text: '取消',
+          color: '#000000'
+        },
+        {
+          text: '确定',
+          color: '#ffff0000'
+        }
+      ]
+    })
+  }
+
+  private aboutus() {
+  }
+
+  private update() {
+    this.promptAction.showToast({
+      message: '正在获取信息',
+      duration: 1000
+    })
+    this.promptAction.showToast({
+      message: '当前已是最新版本',
+      duration: 1000
+    })
+    this.promptAction.showToast({
+      message: '有新版本待更新',
+      duration: 1000
+    })
 
 
   }
@@ -78,41 +245,117 @@ export default struct Settings {
       .alignItems(VerticalAlign.Center)
       .width('100%')
 
-        Scroll(){
-          Column(){
-            List({ space: 12 }) {
-              ForEach(SettingsItem.getSettingsItems(), (item: SettingsItemData[]) => {
-                ListItemGroup() {
-                  ForEach(item, (cell: SettingsItemData) => {
-                    ListItem() {
-                      this.settingCell(cell);
-                    }
-                    .height('48vp')
-                    .onClick(() => this.MenuItemClick(item))
-                  }, (cell: SettingsItemData) => JSON.stringify(cell))
-                }
-                .width('90%')
-                .margin({ left: '5%', right: '5%' }) // 左右各留5%，实现水平居中
-                .divider({
-                  strokeWidth: '1vp',
-                  color: '#0d000000',
-                  startMargin: '42vp',
-                  endMargin: '24vp'
-                })
-                .backgroundColor('#f7f7ff')
-                .borderRadius(16)
-              }, (item: SettingsItemData) => JSON.stringify(item))
-            }
-            .width('100%')
+      Scroll() {
+        Column() {
+          List({ space: 12 }) {
+            ForEach(SettingsItem.getSettingsItems(), (item: SettingsItemData[]) => {
+              ListItemGroup() {
+                ForEach(item, (cell: SettingsItemData) => {
+                  ListItem() {
+                    this.settingCell(cell);
+                  }
+                  .height('48vp')
+                  .onClick(() => this.MenuItemClick(cell))
+                }, (cell: SettingsItemData) => JSON.stringify(cell))
+              }
+              .width('90%')
+              .margin({ left: '5%', right: '5%' }) // 左右各留5%，实现水平居中
+              .divider({
+                strokeWidth: '1vp',
+                color: '#0d000000',
+                startMargin: '42vp',
+                endMargin: '24vp'
+              })
+              .backgroundColor('#f7f7ff')
+              .borderRadius(16)
+            }, (item: SettingsItemData) => JSON.stringify(item))
+          }
+          .width('100%')
 
-          Column() { Text("").height(200) }
+          if (this.showPwdDialog) {
+            CustomContentDialog(){
+              Column({ space: 15 }) {
+                Text('请输入密码')
+                  .fontSize(18)
+                  .fontWeight(FontWeight.Bold)
+                  .width('100%')
+                  .textAlign(TextAlign.Center)
+
+                // 密码输入框
+                Row({ space: 10 }) {
+                  TextInput({
+                    placeholder: '请输入密码',
+                    text: this.inputPwd,
+                  })
+                    .width('80%')
+                    .height('40vp')
+                    .border({ width: 1, color: '#CCCCCC', radius: 4 })
+                    .padding({ left: 10 })
+                    .onChange((value: string) => {
+                      this.inputPwd = value;
+                    })
+
+                  // 密码可见性切换
+                  Button({ type: ButtonType.Circle }) {
+                    Text(this.isPwdVisible ? '●●●' : 'abc')
+                      .fontSize(12)
+                  }
+                  .width('40vp')
+                  .height('40vp')
+                  .onClick(() => {
+                    this.isPwdVisible = !this.isPwdVisible;
+                  })
+                }
+                .width('100%')
+                .padding({ left: 20, right: 20 })
+
+                // 按钮区域
+                Row({ space: 20 }) {
+                  Button('取消')
+                    .width('40%')
+                    .backgroundColor('#F5F5F5')
+                    // .Color('#000000')
+                    .onClick(() => {
+                      this.showPwdDialog = false;
+                    })
+
+                  Button('确定')
+                    .width('40%')
+                    .backgroundColor('#ffffbd00')
+                    // .textColor('#000000')
+                    .onClick(() => {
+                      if (!this.inputPwd) {
+                        promptAction.showToast({ message: '请输入密码' });
+                        return;
+                      }
+
+                      // 密码验证逻辑（根据你的实际需求修改）
+                      if (this.inputPwd === '你的正确密码') {
+                        promptAction.showToast({ message: '密码正确' });
+                        // 验证通过后执行的操作
+                      } else {
+                        promptAction.showToast({ message: '密码错误' });
+                      }
+
+                      this.showPwdDialog = false;
+                    })
+                }
+              }
+              .width('100%')
+              .padding(20)
+              .borderRadius(10)
+            }
+
+
+            Column() {
+              Text("").height(100)
+            }
 
           }
         }
-        .padding({ top: 6, bottom:6 })
-        .edgeEffect(EdgeEffect.Spring, {alwaysEnabled: true})
+        .padding({ top: 6, bottom: 6 })
       }
-      .width('100%')// 确保Column占满屏幕宽度
+      .width('100%') // 确保Column占满屏幕宽度
+    }
   }
 }
-

@@ -1,7 +1,7 @@
 import CardModel from '../viewmodel/CardModel'
 import IndexTab from '../viewmodel/IndexTab'
 import Home from './Home'
-import Settings from './Settings'
+// import Settings from './Settings'
 
 
 @Builder
@@ -42,7 +42,7 @@ struct IndexBottomTab {
           }else if (index == 1) {
           }else if (index == 2) {
           }else if (index == 3) {
-            Settings()
+            // Settings()
           }
         }
         .tabBar(this.TabBuilder(item, index))
