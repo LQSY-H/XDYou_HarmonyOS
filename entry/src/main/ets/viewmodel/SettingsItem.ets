@@ -25,7 +25,7 @@ export class SettingsItems {
       ],
       [
         new SettingsItemData(8, $r('app.media.picture'), '#000000', '开启课表背景图', 'switch'),
-        //如果没有图片被选择，警告提示：请先选择一张图片。
+        //如果没有图片被选择，警告提示：请先选择一张图片作为背景图。
         new SettingsItemData(9, $r('app.media.picture2'), '#000000', '课表背景图选择', ''),
         //获取相册访问权限，打开相册选择一张图片
       ],

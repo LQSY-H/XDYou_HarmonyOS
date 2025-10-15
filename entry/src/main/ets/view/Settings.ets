@@ -1,15 +1,31 @@
 import SettingsItem from '../viewmodel/SettingsItem';
 import SettingsItemData from '../viewmodel/SettingsItemData';
+import { promptAction, PromptAction } from '@kit.ArkUI';
 
 @Builder
 export function SettingsBuilder(name: string, param: object){
   Settings()
 }
-
+@Entry
 @Preview
 @Component
 export default struct Settings {
+  @State handlePopup: boolean = false;
   promptAction: PromptAction = this.getUIContext().getPromptAction();
+
+  // private menuButtons: MenuButton[] = [
+  //   {
+  //     id: '1',
+  //     buttonStyle: {
+  //       backgroundColor: $r('app.color.blue_light'),
+  //       textColor: $r('app.color.blue'),
+  //       radius: 12
+  //     },
+  //     action: () => {
+  //       this.settingsButton()
+  //     }
+  //   },
+  // ]
 
   @Builder
   settingCell(item: SettingsItemData) {
@@ -51,16 +67,52 @@ export default struct Settings {
   }
 
   @State selectedItem: string = ''
-  private MenuItemClick(item: MenuItem){
-    this.selectedItem = item.id
-    switch (item.id){
-      case '0':
+  // private MenuItemClick() {
+  //   this.selectedItem = item.id;
+  //
+  //   // 根据不同项执行不同操作
+  //   switch(item.id) {
+  //     case '1':
+  //       // this.handleItem1Action();
+  //       break;
+  //     case '2':
+  //       // this.handleItem2Action();
+  //       break;
+  //     // 其他项...
+  //   }
+  // }
 
-    }
+  // private handleItem1Action() {
+  //       Button(item.id())
+  //         .width('100%')
+  //         .height('100%')
+  //         .onClick(() => {
+  //           this.handlePopup = !this.handlePopup;
+  //         })
+  //         .bindPopup(this.handlePopup, {
+  //           message: '请先选择一张图片',
+  //           primaryButton: {
+  //             value: '去选择',
+  //             action: () => {
+  //               this.handlePopup = !this.handlePopup;
+  //               console.info('confirm Button click');
+  //             }
+  //           },
+  //           secondaryButton: {
+  //             value: '算了',
+  //             action: () => {
+  //               this.handlePopup = !this.handlePopup;
+  //             }
+  //           },
+  //           onStateChange: (e) => {
+  //             if (!e.isVisible) {
+  //               this.handlePopup = false;
+  //             }
+  //           }
+  //         })
+  // }
 
 
-
-  }
 
   build() {
     Column({ space: 12 }) {
@@ -80,16 +132,42 @@ export default struct Settings {
 
         Scroll(){
           Column(){
+            Button('PopupOptions').margin({ top: 200 })
+              .onClick(() => {
+                this.handlePopup = !this.handlePopup;
+              })
+              .bindPopup(this.handlePopup, {
+                message: '请先选择一张图片作为背景图',
+                primaryButton: {
+                  value: '取消',
+                  action: () => {
+                    this.handlePopup = !this.handlePopup;
+                    console.info('cancel');
+                  }
+                },
+                secondaryButton: {
+                  value: '去选择背景图',
+                  action: () => {
+                    this.handlePopup = !this.handlePopup;
+                  }
+                },
+                onStateChange: (e) => {
+                  if (!e.isVisible) {
+                    this.handlePopup = false;
+                  }
+                }
+              })
+
             List({ space: 12 }) {
               ForEach(SettingsItem.getSettingsItems(), (item: SettingsItemData[]) => {
                 ListItemGroup() {
                   ForEach(item, (cell: SettingsItemData) => {
                     ListItem() {
-                      this.settingCell(cell);
+                        this.settingCell(cell);
                     }
                     .height('48vp')
-                    .onClick(() => this.MenuItemClick(item))
-                  }, (cell: SettingsItemData) => JSON.stringify(cell))
+                    // .onClick(() => this.MenuItemClick(item))
+                  }, (cell: SettingsItemData) => JSON.stringify(cell.id))
                 }
                 .width('90%')
                 .margin({ left: '5%', right: '5%' }) // 左右各留5%，实现水平居中
