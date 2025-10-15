@@ -11,14 +11,12 @@ function inputStyle() {
   .width('328vp')
   .margin({ top: 12 })
 }
-
 @Extend(Line)
 function lineStyle() {
   .width('328vp')
   .height('1vp')
   .backgroundColor('#33182431')
 }
-
 @Extend(Text)
 function blueTextStyle() {
   .fontColor('#007DFF')
@@ -26,9 +24,6 @@ function blueTextStyle() {
   .fontWeight(FontWeight.Medium)
 }
 
-/**
- * Login page
- */
 @Builder
 export function LoginBuilder(name: string, param: object){
   Login()
