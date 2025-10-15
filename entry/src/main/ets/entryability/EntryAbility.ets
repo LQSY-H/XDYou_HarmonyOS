@@ -5,6 +5,7 @@ import ConnectionUtils from '../common/network/ConnectionUtils';
 import PreferencesUtil from '../common/database/PreferencesUtil';
 
 
+
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
@@ -32,9 +33,9 @@ export default class EntryAbility extends UIAbility {
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
     // Main window is created, set main page for this ability
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
+    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageCreate')
 
-    windowStage.loadContent('pages/Index', (err) => {
+    windowStage.loadContent('view/IndexBottomTab', (err) => {
       if (err.code) {
         hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
         return;
