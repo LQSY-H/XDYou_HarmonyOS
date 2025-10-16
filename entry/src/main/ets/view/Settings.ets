@@ -1,6 +1,7 @@
 import SettingsItem from '../viewmodel/SettingsItem';
 import SettingsItemData from '../viewmodel/SettingsItemData';
 import { promptAction, PromptAction } from '@kit.ArkUI';
+import { DialogHub } from '@hadss/dialoghub';
 
 @Builder
 export function SettingsBuilder(name: string, param: object){
@@ -109,6 +110,8 @@ export default struct Settings {
     }
   } //switch完
 
+
+
   private pepwd() {
     this.showPwdDialog = true;
     // 重置密码输入状态
@@ -117,8 +120,9 @@ export default struct Settings {
   }
 
   private phypwd() {
-    DialogHub.init(uiContext);
-    let customDialog = DialogHub.getCustomDialog();
+    DialogHub.getCustomDialog()
+
+
 
     //具体学习：https://gitee.com/hadss/DialogHub/blob/master/hadss_dialog/README.md
   }
@@ -222,7 +226,7 @@ export default struct Settings {
       duration: 1000
     })
     this.promptAction.showToast({
-      message: '有新版本待更新',
+      message: '有新版本可更新,请前往应用市场',
       duration: 1000
     })
 
@@ -272,90 +276,14 @@ export default struct Settings {
           }
           .width('100%')
 
-          if (this.showPwdDialog) {
-            CustomContentDialog(){
-              Column({ space: 15 }) {
-                Text('请输入密码')
-                  .fontSize(18)
-                  .fontWeight(FontWeight.Bold)
-                  .width('100%')
-                  .textAlign(TextAlign.Center)
+          Text("").height(100)
 
-                // 密码输入框
-                Row({ space: 10 }) {
-                  TextInput({
-                    placeholder: '请输入密码',
-                    text: this.inputPwd,
-                  })
-                    .width('80%')
-                    .height('40vp')
-                    .border({ width: 1, color: '#CCCCCC', radius: 4 })
-                    .padding({ left: 10 })
-                    .onChange((value: string) => {
-                      this.inputPwd = value;
-                    })
-
-                  // 密码可见性切换
-                  Button({ type: ButtonType.Circle }) {
-                    Text(this.isPwdVisible ? '●●●' : 'abc')
-                      .fontSize(12)
-                  }
-                  .width('40vp')
-                  .height('40vp')
-                  .onClick(() => {
-                    this.isPwdVisible = !this.isPwdVisible;
-                  })
-                }
-                .width('100%')
-                .padding({ left: 20, right: 20 })
-
-                // 按钮区域
-                Row({ space: 20 }) {
-                  Button('取消')
-                    .width('40%')
-                    .backgroundColor('#F5F5F5')
-                    // .Color('#000000')
-                    .onClick(() => {
-                      this.showPwdDialog = false;
-                    })
-
-                  Button('确定')
-                    .width('40%')
-                    .backgroundColor('#ffffbd00')
-                    // .textColor('#000000')
-                    .onClick(() => {
-                      if (!this.inputPwd) {
-                        promptAction.showToast({ message: '请输入密码' });
-                        return;
-                      }
-
-                      // 密码验证逻辑（根据你的实际需求修改）
-                      if (this.inputPwd === '你的正确密码') {
-                        promptAction.showToast({ message: '密码正确' });
-                        // 验证通过后执行的操作
-                      } else {
-                        promptAction.showToast({ message: '密码错误' });
-                      }
-
-                      this.showPwdDialog = false;
-                    })
-                }
-              }
-              .width('100%')
-              .padding(20)
-              .borderRadius(10)
-            }
-
-
-            Column() {
-              Text("").height(100)
-            }
-
-          }
         }
         .padding({ top: 6, bottom: 6 })
       }
       .width('100%') // 确保Column占满屏幕宽度
+
+
     }
   }
 }
